@@ -1,0 +1,14 @@
+[
+  {
+    "Key": "WELCOME",
+    "Value": "bienvenida"
+  },
+  {
+    "Key": "GOODBYE-LABEL",
+    "Value": "adiós"
+  },
+  {
+    "Key": "LOGIN-TEXT",
+    "Value": "Iniciar sesión"
+  }
+]

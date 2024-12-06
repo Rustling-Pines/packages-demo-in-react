@@ -16,10 +16,9 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "npm run generate-json && react-scripts build",
+    "build": "generate-translations && react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "generate-json": "convert-ts-json"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
