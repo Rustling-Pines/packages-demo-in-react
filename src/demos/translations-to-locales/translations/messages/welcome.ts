@@ -1,10 +1,11 @@
 import { ITranslations } from "@rustling-pines/ts-to-json";
-import { Locales } from ".";
+import { Locales } from "..";
 
-export const WelcomeTranslations: ITranslations<Locales> = {
+export const WelcomeMessage: ITranslations<Locales> = {
     key: 'WELCOME',
     'en-us': 'Welcome',
     fr: 'Bienvenue',
     de: 'Willkommen',
-    es: 'bienvenida'
-};
+    in: 'स्वागत हे',
+    jp: 'ようこそ',
+}

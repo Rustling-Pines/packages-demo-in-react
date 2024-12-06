@@ -1,5 +1,5 @@
 import React from 'react';
-import TsToJsonConverterDemo from './demos/ts-to-json-npm/ts-to-json.demo';
+import TsToJsonConverterDemo from './demos/translations-to-locales/translations-to-locales';
 
 const App: React.FC = () => {
     return (
