@@ -22,5 +22,9 @@
   {
     "Key": "WELCOME",
     "Value": "Willkommen"
+  },
+  {
+    "Key": "OK",
+    "Value": "OK"
   }
 ]

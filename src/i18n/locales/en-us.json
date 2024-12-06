@@ -1,26 +1,30 @@
 [
   {
     "Key": "GOODBYE",
-    "Value": "Au revoir"
+    "Value": "Goodbye"
   },
   {
     "Key": "LOGIN",
-    "Value": "Connexion"
+    "Value": "Login"
   },
   {
     "Key": "LOGOUT",
-    "Value": "Déconnexion"
+    "Value": "Logout"
   },
   {
     "Key": "SAVE_SUCCESS",
-    "Value": "Enregistrement réussi"
+    "Value": "Save Successful"
   },
   {
     "Key": "SUCCESS",
-    "Value": "Succès"
+    "Value": "Success"
   },
   {
     "Key": "WELCOME",
-    "Value": "Bienvenue"
+    "Value": "Welcome"
+  },
+  {
+    "Key": "OK",
+    "Value": "OK"
   }
 ]

@@ -1,4 +1,4 @@
-import { ITranslations } from "@rustling-pines/ts-to-json";
+import { ITranslations } from "@rustling-pines/typesafe-locale-generator";
 import { Locales } from "..";
 
 export const GoodbyeMessage: ITranslations<Locales> = {
