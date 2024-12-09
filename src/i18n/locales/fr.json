@@ -26,5 +26,9 @@
   {
     "Key": "OK",
     "Value": "D'accord"
+  },
+  {
+    "Key": "CANCEL",
+    "Value": "Annuler"
   }
 ]

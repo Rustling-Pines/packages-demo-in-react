@@ -1,34 +1,34 @@
 [
   {
     "Key": "GOODBYE",
-    "Value": "Auf Wiedersehen"
+    "Value": ""
   },
   {
     "Key": "LOGIN",
-    "Value": "Anmelden"
+    "Value": ""
   },
   {
     "Key": "LOGOUT",
-    "Value": "Abmelden"
+    "Value": ""
   },
   {
     "Key": "SAVE_SUCCESS",
-    "Value": "Erfolgreich gespeichert"
+    "Value": ""
   },
   {
     "Key": "SUCCESS",
-    "Value": "Erfolg"
+    "Value": ""
   },
   {
     "Key": "WELCOME",
-    "Value": "Willkommen"
+    "Value": ""
   },
   {
     "Key": "OK",
-    "Value": "OK"
+    "Value": ""
   },
   {
     "Key": "CANCEL",
-    "Value": "Abbrechen"
+    "Value": ""
   }
 ]

@@ -26,5 +26,9 @@
   {
     "Key": "OK",
     "Value": "はい"
+  },
+  {
+    "Key": "CANCEL",
+    "Value": "キャンセル"
   }
 ]

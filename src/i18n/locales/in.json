@@ -26,5 +26,9 @@
   {
     "Key": "OK",
     "Value": "ठीक है"
+  },
+  {
+    "Key": "CANCEL",
+    "Value": "Batal"
   }
 ]
