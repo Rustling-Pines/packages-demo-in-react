@@ -1,37 +1,61 @@
 import { ITranslations } from "@rustling-pines/typesafe-locale-generator";
 
-// Utility to generate translation method types based on keys
-export type GetTranslationType<TKeys> = {
-    [K in keyof TKeys]: () => string;
-};
+// Active locale (defaulting to the first locale)
+let activeLocale: string;
 
-// Internal state to store the active locale
-let activeLocale: string = 'en-us'; // Default locale
-
-// Function to set the active locale with type safety
-// Enforcing explicit generic usage in setLocale
-export const setLocale = <Locales extends string>() => {
-    return (locale: Locales) => {
-        activeLocale = locale;
-    };
+// Function to set the active locale
+const setLocale = <Locales extends string>(locale: Locales) => {
+    if (!activeLocale) {
+        throw new Error(`Invalid locale: ${locale}`);
+    }
+    activeLocale = locale;
 };
 
 // Function to get the active locale
-export const getLocale = <Locales extends string>(): Locales => {
-    return activeLocale as Locales;
+const getLocale = () => {
+    return activeLocale;
 };
 
-// Generate `t` dynamically based on translations and keys
-export const createT = <TKeys extends Record<string, string>, Locales extends string>(
+// Utility to generate translation method types based on keys
+export type GetTranslationType<TKeys> = {
+    [K in keyof TKeys]: (placeholders?: Record<string, string>) => string;
+};
+
+// Main function to create translation utilities
+export const createT = <
+    TKeys extends Record<string, string>,
+    Locales extends string
+>(
     translations: ITranslations<Locales>[],
-    keys: TKeys
-): GetTranslationType<TKeys> => {
+    keys: TKeys,
+    locales: readonly Locales[]
+): {
+    t: GetTranslationType<TKeys>;
+    setLocale: (locale: Locales) => void;
+    getLocale: () => Locales;
+} => {
     const t: Partial<GetTranslationType<TKeys>> = {};
+
     for (const translation of translations) {
         const key = translation.key as keyof TKeys;
         if (key in keys) {
-            t[key] = () => translation[activeLocale as Locales] || translation['en-us' as Locales]; // Fallback to 'en-us'
+            t[key] = (placeholders) => {
+                const localeValue = translation[activeLocale as Locales] || "";
+                if (!placeholders) return localeValue;
+                return localeValue.replace(
+                    /\{(.*?)\}/g,
+                    (_, placeholder) => placeholders[placeholder] || ""
+                );
+            };
         }
     }
-    return t as GetTranslationType<TKeys>;
+
+    // Initialize the default locale
+    activeLocale = locales[0];
+
+    return {
+        t: t as GetTranslationType<TKeys>,
+        setLocale: (locale: Locales) => setLocale(locale),
+        getLocale: () => activeLocale as Locales,
+    };
 };
