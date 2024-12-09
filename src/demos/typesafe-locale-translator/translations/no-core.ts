@@ -1,9 +1,7 @@
-import { Locales, translations } from ".";
-import { createTranslationMethods } from "../../typesafe-i18n-test";
-import { KEYS } from "./keys";
+import { setAppLocale, t } from ".";
 
 // Generate the `t` object dynamically
 export default function Test() {
-    const t = createTranslationMethods<typeof KEYS, Locales>(translations, KEYS);
+    setAppLocale('jp')
     console.log('Calling', t.WELCOME(), t.CANCEL(), t.GOODBYE());
 }

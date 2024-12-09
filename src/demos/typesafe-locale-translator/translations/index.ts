@@ -9,13 +9,14 @@ import { WelcomeMessage } from "./messages/welcome.msg";
 import { OkMessage } from "./messages/ok.msg";
 import { CancelMessage } from "./messages/cancel.msg";
 import { KEYS, TKeys } from "./keys";
-import { createT } from "../../typesafe-i18n-test";
+import { createT, setLocale } from "../../typesafe-i18n-test";
 
 
 export const locales = ['en-us', 'fr', 'de', 'in', 'jp', 'ko'] as const;
 export type Locales = typeof locales[number];
 
-export const translations: ITranslations<Locales>[] = [
+const translations: ITranslations<Locales>[] = [
+    
     GoodbyeMessage,
     LoginMessage,
     LogoutMessage,
@@ -25,6 +26,9 @@ export const translations: ITranslations<Locales>[] = [
     OkMessage,
     CancelMessage
 ];
+export default translations;
 
-// Generate and export the `t` object
-createT(translations, KEYS);
+// Generate and export `t` with type safety
+export const t = createT(translations, KEYS);
+// Usage of setLocale with enforced generic
+export const setAppLocale = setLocale<Locales>();

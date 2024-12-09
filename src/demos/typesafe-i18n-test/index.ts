@@ -5,47 +5,33 @@ export type GetTranslationType<TKeys> = {
     [K in keyof TKeys]: () => string;
 };
 
-// Export a helper for the client to use
-export const getKeyType = <TKeys>() => {
-    return {} as GetTranslationType<TKeys>;
+// Internal state to store the active locale
+let activeLocale: string = 'en-us'; // Default locale
+
+// Function to set the active locale with type safety
+// Enforcing explicit generic usage in setLocale
+export const setLocale = <Locales extends string>() => {
+    return (locale: Locales) => {
+        activeLocale = locale;
+    };
 };
 
-export const createTranslationMethods = <
-    TKeys extends Record<string, string>,
-    Locales extends string
->(
-    translations: ITranslations<Locales>[],
-    keys: TKeys
-): { [K in keyof TKeys]: () => string } => {
-    const t: Partial<{ [K in keyof TKeys]: () => string }> = {};
-
-    for (const key in keys) {
-        const translation = translations.find((t) => t.key === keys[key]);
-        if (translation) {
-            t[key] = () => translation['en-us' as Locales]; // Explicitly type 'en-us' as a valid locale
-        } else {
-            console.warn(`Key ${key} not found in KEYS or translations.`);
-        }
-    }
-
-    return t as { [K in keyof TKeys]: () => string };
+// Function to get the active locale
+export const getLocale = <Locales extends string>(): Locales => {
+    return activeLocale as Locales;
 };
 
-
-let t: Record<string, () => string> = {};
-
+// Generate `t` dynamically based on translations and keys
 export const createT = <TKeys extends Record<string, string>, Locales extends string>(
     translations: ITranslations<Locales>[],
     keys: TKeys
-): void => {
-    const tempT: Partial<Record<keyof TKeys, () => string>> = {};
+): GetTranslationType<TKeys> => {
+    const t: Partial<GetTranslationType<TKeys>> = {};
     for (const translation of translations) {
         const key = translation.key as keyof TKeys;
         if (key in keys) {
-            tempT[key] = () => translation['en-us' as Locales];
+            t[key] = () => translation[activeLocale as Locales] || translation['en-us' as Locales]; // Fallback to 'en-us'
         }
     }
-    t = tempT as Record<keyof TKeys, () => string>;
+    return t as GetTranslationType<TKeys>;
 };
-
-export { t };
