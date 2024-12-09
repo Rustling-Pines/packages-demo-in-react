@@ -8,13 +8,12 @@ import { SuccessMessage } from "./messages/success.msg";
 import { WelcomeMessage } from "./messages/welcome.msg";
 import { OkMessage } from "./messages/ok.msg";
 import { CancelMessage } from "./messages/cancel.msg";
-// import { KEYS, TKeys } from "./keys";
-// import { createTranslationMethods, getKeyType } from '../../typesafe-i18n-test/index'
+import { KEYS, TKeys } from "./keys";
+import { createT } from "../../typesafe-i18n-test";
 
 
 export const locales = ['en-us', 'fr', 'de', 'in', 'jp', 'ko'] as const;
 export type Locales = typeof locales[number];
-
 
 export const translations: ITranslations<Locales>[] = [
     GoodbyeMessage,
@@ -26,3 +25,6 @@ export const translations: ITranslations<Locales>[] = [
     OkMessage,
     CancelMessage
 ];
+
+// Generate and export the `t` object
+createT(translations, KEYS);

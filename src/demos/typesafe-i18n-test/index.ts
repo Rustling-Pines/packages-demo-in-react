@@ -30,3 +30,22 @@ export const createTranslationMethods = <
 
     return t as { [K in keyof TKeys]: () => string };
 };
+
+
+let t: Record<string, () => string> = {};
+
+export const createT = <TKeys extends Record<string, string>, Locales extends string>(
+    translations: ITranslations<Locales>[],
+    keys: TKeys
+): void => {
+    const tempT: Partial<Record<keyof TKeys, () => string>> = {};
+    for (const translation of translations) {
+        const key = translation.key as keyof TKeys;
+        if (key in keys) {
+            tempT[key] = () => translation['en-us' as Locales];
+        }
+    }
+    t = tempT as Record<keyof TKeys, () => string>;
+};
+
+export { t };
